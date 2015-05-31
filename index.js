@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-//var io = require('../..')(server);
-var port = process.env.PORT || 3000;
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3001;
 
 app.get('/', function(req, res){
-  res.send('<h1>Hello world</h1>');
+  //res.send('<h1>Hello world</h1>');
+  res.sendFile(__dirname + '/index.html');
 });
 
 server.listen(port, function () {
