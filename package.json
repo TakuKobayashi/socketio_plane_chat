@@ -1,0 +1,12 @@
+{
+  "name": "socketio_plane_sample",
+  "version": "0.0.0",
+  "description": "A simple chat client using socket.io",
+  "main": "index.js",
+  "author": "taku",
+  "private": true,
+  "license": "",
+  "dependencies": {
+    "express": "3.4.8"
+  }
+}
