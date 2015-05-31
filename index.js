@@ -13,6 +13,10 @@ io.on('connection', function(socket){
   console.log('a user connected');
 
   socket.on('message', function(msg){
+    //受け取った人以外でつながっている人全員に送る場合(broadcastを使う)
+    //socket.broadcast.emit('message', 'hello');
+    //受け取った人含めて全員に送る場合
+    io.emit('message', msg);
     console.log('message: ' + msg);
   });
 

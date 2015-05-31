@@ -27,6 +27,10 @@
         $('#m').val('');
         return false;
       });
+      socket.on('message', function(msg){
+        console.log(msg);
+        $('#messages').append($('<li>').text(msg));
+      });
     </script>
   </body>
 </html>
