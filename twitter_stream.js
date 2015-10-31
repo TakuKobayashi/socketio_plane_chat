@@ -12,7 +12,6 @@ var client = new twitter(twitterInfo);
 var connection = mysql.createConnection(mysqlInfo);
 connection.connect();
 
-
 // タイムラインから、自分のアカウント名を含む文字列でフィルターする
 client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
   stream.on('data', function(tweet) {
@@ -43,7 +42,6 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
     connection.query(query, function(err, rows, fields) {
       if (err) throw err;
       console.log('The solution is: ', rows);
-      console.log('The solution is: ', fields);
     });
 
     console.log(tweet);
@@ -52,10 +50,4 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
   stream.on('error', function(error) {
     throw error;
   });
-});
-
-connection.query('SELECT * from tweets;', function(err, rows, fields) {
-  if (err) throw err;
-  console.log('The solution is: ', rows);
-  console.log('The solution is: ', fields);
 });
