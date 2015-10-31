@@ -19,6 +19,30 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       if (err) throw err;
       console.log(result);
     });
+    var params = {
+      tweet: tweet.text,
+      twitter_id: tweet.user.id,
+      user_name: tweet.user.name,
+      tweeted_at: tweet.user.created_at,
+      profile_image_url: tweet.user.profile_image_url,
+      profile_background_image_url: tweet.user.profile_background_image_url
+    };
+    var query = 'INSERT INTO `tweets` (';
+    var keys = [];
+    var values = [];
+    Object.keys(params).forEach(function (key) {
+      keys.push(key);
+      values.push(params[key]);
+    });
+    query += keys.join(",");
+    query += 'VALUES (';
+    query += values.join(",");
+    query += ")";
+    connection.query(query, function(err, rows, fields) {
+      if (err) throw err;
+      console.log('The solution is: ', rows);
+      console.log('The solution is: ', fields);
+    });
 
     console.log(tweet);
   });
