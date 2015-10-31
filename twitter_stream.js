@@ -27,7 +27,7 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       profile_image_url: tweet.user.profile_image_url,
       profile_background_image_url: tweet.user.profile_background_image_url
     };
-    var query = 'INSERT INTO `tweets` (';
+    var query = "INSERT INTO `tweets` ('";
     var keys = [];
     var values = [];
     Object.keys(params).forEach(function (key) {
@@ -35,9 +35,9 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       values.push(params[key]);
     });
     query += keys.join(",");
-    query += ') VALUES (';
-    query += values.join(",");
-    query += ")";
+    query += ") VALUES ('";
+    query += values.join("','");
+    query += "')";
 
     connection.query(query, function(err, rows, fields) {
       if (err) throw err;
