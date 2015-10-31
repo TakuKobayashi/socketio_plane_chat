@@ -2,6 +2,7 @@ var MeCab = new require('mecab-async'), mecab = new MeCab();
 var twitter = require('twitter');   // twitterモジュールを読み込み
 var fs = require('fs');
 var mysql = require('mysql');
+var moment = require("moment");
 
 var twitterInfo = JSON.parse(fs.readFileSync('./config/twitter.json', 'utf8'));
 var mysqlInfo = JSON.parse(fs.readFileSync('./config/mysql.json', 'utf8'));
@@ -23,11 +24,11 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       tweet: tweet.text,
       twitter_id: tweet.user.id,
       user_name: tweet.user.name,
-      tweeted_at: tweet.user.created_at,
+      tweeted_at: moment(tweet.user.created_at).format('YYYY-MM-DD HH:mm:ss'),
       profile_image_url: tweet.user.profile_image_url,
       profile_background_image_url: tweet.user.profile_background_image_url
     };
-    var query = "INSERT INTO `tweets` ('";
+    var query = "INSERT INTO `tweets` (";
     var keys = [];
     var values = [];
     Object.keys(params).forEach(function (key) {
