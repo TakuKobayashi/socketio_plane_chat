@@ -35,9 +35,10 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       values.push(params[key]);
     });
     query += keys.join(",");
-    query += 'VALUES (';
+    query += ') VALUES (';
     query += values.join(",");
     query += ")";
+
     connection.query(query, function(err, rows, fields) {
       if (err) throw err;
       console.log('The solution is: ', rows);
