@@ -20,7 +20,7 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       var words = result.map(function(cell){
         return cell[0]
       });
-      sQuery = "SELECT SUM(`words`.`word`) AS sum_id FROM `words`  WHERE `words`.`id` IN ('" + words.join("','") "'')";
+      sQuery = "SELECT SUM(`words`.`word`) AS sum_id FROM `words`  WHERE `words`.`id` IN ('" + words.join("','") + "')";
       connection.query(sQuery, function(err, rows, fields) {
         console.log(result);
       });
