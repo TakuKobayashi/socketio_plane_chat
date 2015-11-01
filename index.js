@@ -41,7 +41,7 @@ client.stream('statuses/filter', {track: '#battle7,#MA11,#mbshack'}, function(st
       tweeted_at: moment(tweet.user.created_at).format('YYYY-MM-DD HH:mm:ss'),
       profile_image_url: tweet.user.profile_image_url,
       profile_background_image_url: tweet.user.profile_background_image_url,
-      score: 10,
+      score: 10
     };
     var query = "INSERT INTO `tweets` (";
     var keys = [];
