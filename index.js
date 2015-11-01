@@ -28,7 +28,7 @@ app.get('/', function(req, res){
 });
 
 // タイムラインから、自分のアカウント名を含む文字列でフィルターする
-client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
+client.stream('statuses/filter', {track: '#battle7,#MA11,#mbshack'}, function(stream) {
   stream.on('data', function(tweet) {
     mecab.parse(tweet.text, function(err, result) {
       if (err) throw err;
@@ -40,7 +40,8 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
       user_name: tweet.user.name,
       tweeted_at: moment(tweet.user.created_at).format('YYYY-MM-DD HH:mm:ss'),
       profile_image_url: tweet.user.profile_image_url,
-      profile_background_image_url: tweet.user.profile_background_image_url
+      profile_background_image_url: tweet.user.profile_background_image_url,
+      score: 10,
     };
     var query = "INSERT INTO `tweets` (";
     var keys = [];
