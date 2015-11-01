@@ -17,7 +17,13 @@ client.stream('statuses/filter', {track: 'mbs'}, function(stream) {
   stream.on('data', function(tweet) {
     mecab.parse(tweet.text, function(err, result) {
       if (err) throw err;
-      console.log(result);
+      var words = result.map(function(cell){
+        return cell[0]
+      });
+      sQuery = "SELECT SUM(`words`.`word`) AS sum_id FROM `words`  WHERE `words`.`id` IN ('" + words.join("','") "'')";
+      connection.query(sQuery, function(err, rows, fields) {
+        console.log(result);
+      });
     });
     var params = {
       tweet: tweet.text,
